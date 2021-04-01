@@ -17,10 +17,10 @@ class Solution {
             }
             absDv >>= 1; i --;
             
-            // cannot write as 1<<i as the result would be of type in rather than long
+            
             res += 1l<<i;
             
-            // For next round
+            
             absDd -= absDv;
             absDv = absDv0;
         }
