@@ -1,0 +1,37 @@
+class Solution {
+    public int divide(int dividend, int divisor) {
+       
+        boolean isSigned = (dividend>0&&divisor<0) || (dividend<0&&divisor>0);
+        long res = 0;
+        long absDd0 = Math.abs((long)dividend);
+        long absDv0 = Math.abs((long)divisor);
+        
+        long absDd = absDd0;
+        long absDv = absDv0;
+        while (absDd >= absDv)
+        {
+            int i = 0; 
+            while (absDd - absDv >= 0)
+            {
+                absDv <<= 1; i ++;
+            }
+            absDv >>= 1; i --;
+            
+            // cannot write as 1<<i as the result would be of type in rather than long
+            res += 1l<<i;
+            
+            // For next round
+            absDd -= absDv;
+            absDv = absDv0;
+        }
+        
+        if (!isSigned)
+        {
+            return res > Integer.MAX_VALUE ? Integer.MAX_VALUE : (int)res;
+        }
+        else
+        {
+            return res > Integer.MAX_VALUE ? Integer.MIN_VALUE : (-1)*(int)res;
+        }
+    }
+}
